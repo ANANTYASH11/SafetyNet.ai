@@ -1,0 +1,68 @@
+{
+  "features": [
+    "income",
+    "expenses",
+    "emi",
+    "savings",
+    "dependents",
+    "age",
+    "has_insurance",
+    "renting",
+    "job_enc",
+    "life_enc",
+    "city_enc",
+    "emi_ratio",
+    "expense_ratio",
+    "surplus",
+    "savings_ratio",
+    "survival_months"
+  ],
+  "job_classes": [
+    "business",
+    "corporate",
+    "freelancer",
+    "gig",
+    "govt"
+  ],
+  "life_classes": [
+    "married_with_kids",
+    "mid_career",
+    "pre_retirement",
+    "single",
+    "single_parent"
+  ],
+  "city_classes": [
+    "1",
+    "2",
+    "3"
+  ],
+  "level_classes": [
+    "Critical",
+    "High",
+    "Low",
+    "Medium"
+  ],
+  "job_score_map": {
+    "govt": 5,
+    "corporate": 22,
+    "freelancer": 48,
+    "business": 38,
+    "gig": 42
+  },
+  "job_months_map": {
+    "govt": 0.0,
+    "corporate": 1.5,
+    "freelancer": 4.5,
+    "business": 3.5,
+    "gig": 3.5
+  },
+  "model_info": {
+    "regressor": "XGBoostRegressor  n_estimators=400  max_depth=7",
+    "classifier": "XGBoostClassifier n_estimators=400  max_depth=7",
+    "train_samples": 6400,
+    "test_samples": 1600,
+    "test_mae": 4.22,
+    "test_r2": 0.9486,
+    "test_accuracy": 0.8531
+  }
+}

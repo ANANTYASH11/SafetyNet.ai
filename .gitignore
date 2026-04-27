@@ -1,0 +1,37 @@
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# ── Environment / secrets ──────────────────────────────────────
+server/.env
+.env
+.env.local
+.env.*.local
+
+# ── Build output ───────────────────────────────────────────────
+client/dist/
+client/.vite/
+
+# ── Runtime data (local only) ──────────────────────────────────
+server/data.json
+server/users.json
+
+# ── ML artefacts ───────────────────────────────────────────────
+ml/model/*.pkl
+ml/model/*.joblib
+ml/__pycache__/
+ml/*.pyc
+__pycache__/
+*.pyc
+*.pyo
+
+# ── Logs ───────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── OS / editor ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp

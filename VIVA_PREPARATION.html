@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>SafetyNet.ai — Viva Preparation Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --purple:#7c3aed;--purple-light:#a78bfa;--purple-dark:#5b21b6;
+    --green:#059669;--amber:#d97706;--orange:#ea580c;--red:#dc2626;
+    --blue:#2563eb;--teal:#0891b2;
+    --bg:#f8fafc;--surface:#fff;--surface2:#f1f5f9;
+    --border:#e2e8f0;--text:#0f172a;--muted:#475569;--subtle:#94a3b8;
+  }
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:13.5px;line-height:1.65;}
+
+  /* ── Page layout ── */
+  .container{max-width:960px;margin:0 auto;padding:40px 32px;}
+
+  /* ── Cover ── */
+  .cover{background:linear-gradient(135deg,#1e0a3c 0%,#2d1066 50%,#1e3a6e 100%);color:#fff;border-radius:16px;padding:56px 48px;margin-bottom:40px;text-align:center;}
+  .cover .badge{display:inline-block;background:rgba(124,58,237,0.35);border:1px solid rgba(167,139,250,0.4);border-radius:20px;padding:4px 16px;font-size:11px;font-weight:600;letter-spacing:.08em;color:#c4b5fd;margin-bottom:20px;text-transform:uppercase;}
+  .cover h1{font-size:2.8rem;font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:12px;}
+  .cover h1 span{color:#a78bfa;}
+  .cover .sub{font-size:1.05rem;color:rgba(196,181,253,0.85);margin-bottom:32px;}
+  .cover .tech-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px;}
+  .tech-tag{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,0.9);}
+  .cover .meta{font-size:12px;color:rgba(196,181,253,0.6);}
+
+  /* ── Section ── */
+  .section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:24px;page-break-inside:avoid;}
+  .section-title{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border);}
+  .section-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+  .section-title h2{font-size:1.15rem;font-weight:700;color:var(--text);}
+  .section-title .num{font-size:11px;font-weight:700;color:var(--muted);background:var(--surface2);border-radius:6px;padding:2px 8px;margin-left:auto;}
+
+  /* ── Sub section ── */
+  h3{font-size:0.95rem;font-weight:700;color:var(--purple-dark);margin:18px 0 8px;display:flex;align-items:center;gap:6px;}
+  h3::before{content:"▶";font-size:8px;color:var(--purple-light);}
+  h4{font-size:0.87rem;font-weight:600;color:var(--text);margin:12px 0 6px;}
+
+  /* ── Lists ── */
+  ul,ol{padding-left:22px;}
+  li{margin-bottom:5px;font-size:13.5px;}
+  li strong{color:var(--purple-dark);}
+
+  /* ── Code ── */
+  code{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:5px;padding:2px 6px;color:#5b21b6;}
+  pre{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:#0f172a;color:#e2e8f0;border-radius:10px;padding:16px 20px;overflow-x:auto;margin:10px 0;line-height:1.7;border:1px solid rgba(255,255,255,0.06);}
+  pre .c{color:#475569;} pre .k{color:#c084fc;} pre .s{color:#86efac;} pre .n{color:#93c5fd;}
+  pre .f{color:#fde68a;} pre .num{color:#f9a8d4;}
+
+  /* ── Cards grid ── */
+  .grid{display:grid;gap:14px;}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .grid-3{grid-template-columns:1fr 1fr 1fr;}
+  .card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .card .card-title{font-weight:700;font-size:12.5px;color:var(--text);margin-bottom:6px;}
+  .card p{font-size:12.5px;color:var(--muted);line-height:1.6;}
+  .card .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em;}
+
+  /* ── Risk level colors ── */
+  .low   {color:var(--green);}  .bg-low   {background:#dcfce7;color:#166534;}
+  .medium{color:var(--amber);}  .bg-medium{background:#fef3c7;color:#92400e;}
+  .high  {color:var(--orange);} .bg-high  {background:#ffedd5;color:#9a3412;}
+  .critical{color:var(--red);}  .bg-critical{background:#fee2e2;color:#991b1b;}
+
+  /* ── Q&A boxes ── */
+  .qa{border-left:3px solid var(--purple);background:linear-gradient(90deg,rgba(124,58,237,0.04),transparent);border-radius:0 8px 8px 0;padding:12px 16px;margin:10px 0;}
+  .qa .q{font-weight:700;color:var(--purple-dark);font-size:13px;margin-bottom:6px;}
+  .qa .a{color:var(--muted);font-size:13px;line-height:1.7;}
+
+  /* ── Alert boxes ── */
+  .alert{border-radius:8px;padding:12px 16px;margin:10px 0;font-size:12.5px;display:flex;gap:10px;align-items:flex-start;}
+  .alert-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+  .alert-info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;}
+  .alert-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e;}
+  .alert-tip {background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;}
+  .alert-key {background:#faf5ff;border:1px solid #e9d5ff;color:#5b21b6;}
+
+  /* ── Flow diagram ── */
+  .flow{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:12px 0;}
+  .flow-step{background:var(--purple);color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;white-space:nowrap;}
+  .flow-arrow{color:var(--purple-light);font-size:18px;font-weight:700;}
+  .flow-step.alt{background:var(--blue);}
+  .flow-step.ml{background:#0891b2;}
+  .flow-step.ai{background:#d97706;}
+
+  /* ── Table ── */
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0;}
+  th{background:var(--surface2);padding:8px 12px;text-align:left;font-weight:700;font-size:11.5px;color:var(--muted);border:1px solid var(--border);text-transform:uppercase;letter-spacing:.04em;}
+  td{padding:8px 12px;border:1px solid var(--border);color:var(--text);vertical-align:top;}
+  tr:nth-child(even) td{background:#fafafa;}
+
+  /* ── Score pill ── */
+  .pill{display:inline-block;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;}
+
+  /* ── Architecture diagram ── */
+  .arch{display:flex;gap:16px;flex-wrap:wrap;margin:14px 0;}
+  .arch-box{border-radius:10px;padding:16px 18px;flex:1;min-width:180px;}
+  .arch-box h4{font-size:12.5px;font-weight:700;margin-bottom:8px;}
+  .arch-box ul{list-style:none;padding:0;}
+  .arch-box li{font-size:12px;color:var(--muted);padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+  .arch-frontend{background:#eff6ff;border:1px solid #bfdbfe;}
+  .arch-backend{background:#faf5ff;border:1px solid #e9d5ff;}
+  .arch-ml{background:#ecfdf5;border:1px solid #bbf7d0;}
+
+  /* ── Print ── */
+  @media print{
+    body{font-size:12px;}
+    .container{padding:16px;}
+    .cover{border-radius:0;}
+    .section{page-break-inside:avoid;border:1px solid #ccc;}
+    @page{margin:15mm;}
+  }
+  /* ── Separator ── */
+  .sep{height:1px;background:var(--border);margin:16px 0;}
+  p{margin-bottom:8px;}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:12px;}
+  .highlight{background:linear-gradient(90deg,rgba(124,58,237,0.12),rgba(124,58,237,0.03));border-left:3px solid var(--purple);padding:10px 14px;border-radius:0 8px 8px 0;margin:8px 0;}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════════════════ COVER ══ -->
+<div class="cover">
+  <div class="badge">INT 428 · Project Viva Preparation Guide</div>
+  <h1>🛡️ SafetyNet<span>.ai</span></h1>
+  <div class="sub">AI-Powered Emergency Fund & Financial Risk Analyser — Built for India</div>
+  <div class="tech-row">
+    <span class="tech-tag">React 19</span>
+    <span class="tech-tag">Express 5</span>
+    <span class="tech-tag">Node.js</span>
+    <span class="tech-tag">LLaMA-3.3-70b (Groq)</span>
+    <span class="tech-tag">XGBoost</span>
+    <span class="tech-tag">Python / Flask</span>
+    <span class="tech-tag">MongoDB + Mongoose</span>
+    <span class="tech-tag">JWT Auth</span>
+    <span class="tech-tag">Tailwind v4</span>
+    <span class="tech-tag">Framer Motion</span>
+    <span class="tech-tag">jsPDF</span>
+    <span class="tech-tag">Nodemailer</span>
+  </div>
+  <div class="meta">Prepared: April 29, 2026 &nbsp;|&nbsp; Full-Stack AI Web Application</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ 1. PROJECT OVERVIEW ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#ede9fe;">🎯</div>
+    <h2>1. Project Overview — What is SafetyNet.ai?</h2>
+    <span class="num">SECTION 1</span>
+  </div>
+
+  <p><strong>SafetyNet.ai</strong> is a full-stack, AI-powered web application that helps Indian individuals assess their <strong>financial risk</strong> and calculate their ideal <strong>emergency fund</strong>. It combines a rule-based financial engine, a Large Language Model (LLaMA via Groq), and a trained Machine Learning model (XGBoost) to give personalised, data-driven financial guidance.</p>
+
+  <div class="grid grid-3" style="margin-top:16px;">
+    <div class="card">
+      <div class="tag" style="background:#ede9fe;color:#5b21b6;">Core Problem</div>
+      <div class="card-title">Why does this exist?</div>
+      <p>Most Indians don't have an emergency fund. Sudden job loss, medical emergency, or financial shock can be devastating. This tool helps people understand their risk and build a safety net.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#dcfce7;color:#166534;">Solution</div>
+      <div class="card-title">What does it do?</div>
+      <p>Takes 14 financial inputs (income, EMI, savings, job type, city, age etc.), runs 3 parallel analysis engines, and outputs a risk score (0–100), recommended fund size, and actionable steps.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#eff6ff;color:#1e40af;">Target Users</div>
+      <div class="card-title">Who uses it?</div>
+      <p>Indian working professionals across Tier 1/2/3 cities — salaried employees, freelancers, gig workers, business owners, and government employees who want personalised financial risk assessment.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-key" style="margin-top:16px;">
+    <span class="alert-icon">💡</span>
+    <div><strong>Key Innovation:</strong> The project combines three independent analysis engines — a rule-based financial algorithm, a Groq LLM (LLaMA-3.3-70b), and a trained XGBoost ML model — and shows an <em>AI/ML agreement indicator</em> to build user trust.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ 2. ARCHITECTURE ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#ecfdf5;">🏗️</div>
+    <h2>2. System Architecture</h2>
+    <span class="num">SECTION 2</span>
+  </div>
+
+  <h3>Three-Tier Architecture</h3>
+  <div class="arch">
+    <div class="arch-box arch-frontend">
+      <h4>🖥️ Frontend (Client)</h4>
+      <ul>
+        <li>React 19 + Vite 8</li>
+        <li>Tailwind CSS v4</li>
+        <li>Framer Motion animations</li>
+        <li>Recharts for data viz</li>
+        <li>jsPDF for report export</li>
+        <li>Web Speech API (voice)</li>
+        <li>Runs on port 5173</li>
+      </ul>
+    </div>
+    <div class="arch-box arch-backend">
+      <h4>⚙️ Backend (Server)</h4>
+      <ul>
+        <li>Express 5 + Node.js</li>
+        <li>REST API (JSON)</li>
+        <li>JWT authentication</li>
+        <li>bcryptjs password hashing</li>
+        <li>Nodemailer (email)</li>
+        <li>MongoDB + Mongoose ORM</li>
+        <li>Runs on port 5001</li>
+      </ul>
+    </div>
+    <div class="arch-box arch-ml">
+      <h4>🤖 ML Service (Python)</h4>
+      <ul>
+        <li>Flask REST API</li>
+        <li>XGBoost models</li>
+        <li>scikit-learn pipeline</li>
+        <li>Trained on 8,000 samples</li>
+        <li>R² = 0.949, Acc = 85.3%</li>
+        <li>Runs on port 5002</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Request Flow (POST /api/analyze)</h3>
+  <div class="flow">
+    <span class="flow-step">User fills form</span><span class="flow-arrow">→</span>
+    <span class="flow-step">React sends POST</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Express validates</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Calc Engine</span><span class="flow-arrow">⇒</span>
+    <span class="flow-step ai">Groq LLM</span>
+    <span style="font-size:11px;color:#94a3b8;">parallel with</span>
+    <span class="flow-step ml">XGBoost ML</span><span class="flow-arrow">→</span>
+    <span class="flow-step alt">Unified JSON</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Dashboard</span>
+  </div>
+
+  <div class="alert alert-info">
+    <span class="alert-icon">ℹ️</span>
+    <div>The Groq AI call and the XGBoost ML prediction run <strong>in parallel</strong> using <code>Promise.all()</code>, so the response time is determined by whichever is slower (max ~8s for AI, ~4s for ML), not the sum of both.</div>
+  </div>
+
+  <h3>Key Design Decisions</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">MongoDB + File Fallback</div>
+      <p>If <code>MONGO_URI</code> is not set, the app uses a local <code>data.json</code> file for storage — making it runnable without a database for demos.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">ML Microservice Pattern</div>
+      <p>The XGBoost model runs as a separate Flask microservice on port 5002. If it's offline, Node.js gracefully falls back and returns <code>ml: null</code>.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">LLM Fallback Engine</div>
+      <p>If the Groq API key is missing or the API fails, a high-quality <em>rule-based insight engine</em> generates insights — the app never breaks.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">CORS Security</div>
+      <p>The backend only allows origins listed in <code>CLIENT_ORIGIN</code> env variable. The JSON body is capped at 10KB to prevent payload attacks.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ 3. TECHNOLOGY STACK DEEP DIVE ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fff7ed;">⚙️</div>
+    <h2>3. Technology Stack — Detailed Explanation</h2>
+    <span class="num">SECTION 3</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Layer</th><th>Technology</th><th>Version</th><th>Why This Choice?</th></tr></thead>
+    <tbody>
+      <tr><td>Frontend</td><td><strong>React 19</strong></td><td>19.2.5</td><td>Component-based UI, hooks for state management, Context API for theme/auth</td></tr>
+      <tr><td>Build Tool</td><td><strong>Vite 8</strong></td><td>8.0.10</td><td>Lightning-fast HMR, ESM-native, much faster than CRA/Webpack</td></tr>
+      <tr><td>Styling</td><td><strong>Tailwind CSS v4</strong></td><td>4.2.4</td><td>Utility-first CSS, no unused styles, custom design tokens via CSS variables</td></tr>
+      <tr><td>Animation</td><td><strong>Framer Motion</strong></td><td>12.38</td><td>Declarative animations, AnimatePresence for page transitions</td></tr>
+      <tr><td>Charts</td><td><strong>Recharts</strong></td><td>3.8.1</td><td>React-native chart library, AreaChart + PieChart for financial projections</td></tr>
+      <tr><td>PDF Export</td><td><strong>jsPDF</strong></td><td>4.2.1</td><td>Client-side PDF generation — no server needed for report download</td></tr>
+      <tr><td>Backend</td><td><strong>Express 5</strong></td><td>5.2.1</td><td>Minimal, fast Node.js framework; v5 has async error handling improvements</td></tr>
+      <tr><td>Database ORM</td><td><strong>Mongoose</strong></td><td>9.5.0</td><td>Schema validation, virtuals, indexes for MongoDB</td></tr>
+      <tr><td>Auth</td><td><strong>JWT + bcryptjs</strong></td><td>9.0.3 / 3.0.3</td><td>Stateless auth — no session storage needed; bcrypt cost factor 12 for passwords</td></tr>
+      <tr><td>HTTP Logging</td><td><strong>Morgan</strong></td><td>1.10.1</td><td>Standard HTTP request logger piped into custom Winston/logger</td></tr>
+      <tr><td>AI/LLM</td><td><strong>Groq + LLaMA-3.3-70b</strong></td><td>—</td><td>Fastest LLM inference available (~500 tokens/sec); free tier sufficient for demos</td></tr>
+      <tr><td>ML Model</td><td><strong>XGBoost</strong></td><td>—</td><td>Gradient boosting excels at tabular data; trained on 8,000 synthetic profiles</td></tr>
+      <tr><td>ML Server</td><td><strong>Flask</strong></td><td>—</td><td>Lightweight Python web server; perfect for serving ML model predictions</td></tr>
+      <tr><td>Email</td><td><strong>Nodemailer</strong></td><td>8.0.7</td><td>Welcome email on registration via Gmail SMTP</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ════════════════════════════════════ 4. FINANCIAL ALGORITHM EXPLAINED ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fef3c7;">🧮</div>
+    <h2>4. Financial Calculation Engine — The Core Algorithm</h2>
+    <span class="num">SECTION 4</span>
+  </div>
+
+  <p>File: <code>server/services/calculationService.js</code> — This is the heart of the application. It takes 14 inputs and produces a <strong>Risk Score (0–100)</strong> and a <strong>Recommended Emergency Fund</strong> amount.</p>
+
+  <h3>Step 1: Base Calculation</h3>
+  <div class="highlight">
+    <strong>Base Fund = (Monthly Expenses + EMI) × 3 months minimum</strong><br/>
+    The minimum recommended emergency fund is 3 months of total obligations.
+  </div>
+
+  <h3>Step 2: The 9 Risk Factors (14 Input Dimensions)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Factor</th><th>Risk Score Impact</th><th>Extra Months Added</th><th>Explanation</th></tr></thead>
+    <tbody>
+      <tr><td>3a</td><td><strong>Employment Type</strong></td><td>Govt: +5, Corporate: +22, Business: +38, Gig: +42, Freelancer: +48</td><td>0 to 4.5 months</td><td>Freelancers have irregular income — need 4.5 extra months buffer</td></tr>
+      <tr><td>3b</td><td><strong>Dependents</strong></td><td>+7 per dependent</td><td>+0.8 per dependent</td><td>Each family member increases financial obligation</td></tr>
+      <tr><td>3c</td><td><strong>EMI/Debt Load</strong></td><td>&gt;50%: +32, 30–50%: +16, &lt;30%: +6</td><td>+0.5 to +2.5</td><td>RBI recommends keeping EMI below 30% of income</td></tr>
+      <tr><td>3d</td><td><strong>City Tier</strong></td><td>Tier 1: +8</td><td>Tier 1: +1, Tier 3: −0.5</td><td>Tier 1 metro has 18% higher cost of living multiplier</td></tr>
+      <tr><td>3e</td><td><strong>Age</strong></td><td>&gt;50: +10, &lt;27: −5</td><td>&gt;50: +1 month</td><td>Pre-retirement phase needs larger buffer</td></tr>
+      <tr><td>3f</td><td><strong>Health Insurance</strong></td><td>No insurance: +18</td><td>+1 month if uninsured</td><td>Medical bills ₹2–10L are the #1 cause of financial ruin in India</td></tr>
+      <tr><td>3g</td><td><strong>Rent vs Own</strong></td><td>Renting: +5</td><td>0</td><td>Rent is a fixed obligation during income loss</td></tr>
+      <tr><td>3h</td><td><strong>Savings Rate</strong></td><td>&gt;85% spending: +20, &lt;55% spending: −(protective)</td><td>0</td><td>Spending more than 85% of income leaves no buffer</td></tr>
+      <tr><td>3i</td><td><strong>Life Stage</strong></td><td>With kids/single parent: +8</td><td>+1 month</td><td>Family responsibilities increase financial risk</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Step 3: Risk Level Classification</h3>
+  <div class="grid grid-2">
+    <div>
+      <table>
+        <thead><tr><th>Score Range</th><th>Risk Level</th><th>Color</th></tr></thead>
+        <tbody>
+          <tr><td>0 – 25</td><td class="low"><strong>Low Risk</strong></td><td>Emerald Green</td></tr>
+          <tr><td>26 – 50</td><td class="medium"><strong>Medium Risk</strong></td><td>Amber</td></tr>
+          <tr><td>51 – 72</td><td class="high"><strong>High Risk</strong></td><td>Orange</td></tr>
+          <tr><td>73 – 100</td><td class="critical"><strong>Critical Risk</strong></td><td>Red</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">City Cost Multiplier</div>
+      <p>The final fund amount is multiplied by the city tier cost factor:</p>
+      <ul style="margin-top:8px;">
+        <li><strong>Tier 1 Metro:</strong> ×1.18 (18% more expensive)</li>
+        <li><strong>Tier 2 City:</strong> ×1.0 (baseline)</li>
+        <li><strong>Tier 3 Town:</strong> ×0.82 (18% cheaper)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Step 4: Investment Tier Split (3-Tier Strategy)</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="tag" style="background:#dcfce7;color:#166534;">Tier 1 — Liquid</div>
+      <div class="card-title">Savings Account / Cash</div>
+      <p>1 month of expenses. Instantly accessible. For immediate emergencies (hospital admission, same-day need).</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#eff6ff;color:#1e40af;">Tier 2 — Liquid MF</div>
+      <div class="card-title">Liquid Mutual Funds</div>
+      <p>2 months of expenses. T+1 redemption. Better returns than savings (~7% p.a.). For 1–2 week emergencies.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#faf5ff;color:#5b21b6;">Tier 3 — FD</div>
+      <div class="card-title">Fixed Deposits</div>
+      <p>Remaining fund. Higher interest rate (~7.5% p.a.). For longer-term job loss scenarios (2–6 months).</p>
+    </div>
+  </div>
+
+  <h3>Output Fields Returned</h3>
+  <pre><span class="c">// Key output fields from calculationService.calculateEmergencyFund()</span>
+{
+  riskScore:          <span class="num">62</span>,           <span class="c">// 0–100</span>
+  riskLevel:          <span class="s">"High"</span>,        <span class="c">// Low / Medium / High / Critical</span>
+  recommendedFund:    <span class="num">540000</span>,       <span class="c">// ₹5.4 Lakh target fund</span>
+  monthsRecommended:  <span class="num">7.5</span>,           <span class="c">// 7.5 months buffer recommended</span>
+  savingsGap:         <span class="num">290000</span>,       <span class="c">// ₹2.9L still to be saved</span>
+  percentFunded:      <span class="num">46</span>,            <span class="c">// 46% of goal achieved</span>
+  monthsCovered:      <span class="num">3.2</span>,           <span class="c">// current savings cover 3.2 months</span>
+  survivalMonths:     <span class="num">3.2</span>,           <span class="c">// same as monthsCovered</span>
+  surplusIncome:      <span class="num">15000</span>,        <span class="c">// monthly surplus available to save</span>
+  suggestedMonthly:   <span class="num">8000</span>,         <span class="c">// recommended monthly savings amount</span>
+  riskFactors:        [...],         <span class="c">// array of risk factor objects</span>
+  protectiveFactors:  [...],         <span class="c">// array of positive factors</span>
+  tierPlan:           {...},         <span class="c">// 3-tier investment breakdown</span>
+  projection:         [...],         <span class="c">// 12-month savings projection array</span>
+}</pre>
+</div>
+
+<!-- ══════════════════════════════════════════ 5. ML MODEL (XGBOOST) ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#ecfdf5;">🤖</div>
+    <h2>5. Machine Learning Model — XGBoost</h2>
+    <span class="num">SECTION 5</span>
+  </div>
+
+  <h3>What is XGBoost?</h3>
+  <p><strong>XGBoost (Extreme Gradient Boosting)</strong> is an ensemble ML algorithm that builds multiple decision trees sequentially, where each tree corrects the errors of the previous one. It's the go-to algorithm for structured/tabular data and has won numerous Kaggle competitions.</p>
+
+  <div class="grid grid-2" style="margin:12px 0;">
+    <div class="card">
+      <div class="card-title">Why XGBoost for this project?</div>
+      <ul>
+        <li>Financial data is tabular (rows & columns) — XGBoost excels here</li>
+        <li>Handles missing values internally</li>
+        <li>Provides feature importance scores</li>
+        <li>Fast training and inference</li>
+        <li>No need for feature scaling (unlike neural networks)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Model Performance Metrics</div>
+      <ul>
+        <li><strong>Training Samples:</strong> 6,400 (80% of 8,000)</li>
+        <li><strong>Test Samples:</strong> 1,600 (20% of 8,000)</li>
+        <li><strong>Regressor R²:</strong> 0.949 (94.9% variance explained)</li>
+        <li><strong>Classifier Accuracy:</strong> 85.3%</li>
+        <li><strong>MAE (Mean Absolute Error):</strong> 4.22 risk score points</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Training Data Generation (train_model.py)</h3>
+  <div class="alert alert-warn">
+    <span class="alert-icon">⚠️</span>
+    <div>The model is trained on <strong>synthetically generated data</strong> — 8,000 Indian household profiles created programmatically using realistic distributions. This is valid because the labels are computed using the exact same rule-based algorithm as <code>calculationService.js</code>, so the ML model learns to approximate the financial logic.</div>
+  </div>
+  <p>The synthetic data generation uses:</p>
+  <ul>
+    <li>Income: ₹15,000–₹3,00,000/month (log-normal distribution)</li>
+    <li>Expenses: 40–80% of income</li>
+    <li>EMI: 0–50% of income</li>
+    <li>Job types distributed: 20% govt, 40% corporate, 15% freelancer, 15% business, 10% gig</li>
+  </ul>
+
+  <h3>The 16 Features Used</h3>
+  <div class="grid grid-2">
+    <div>
+      <h4>Raw Input Features (8)</h4>
+      <table>
+        <tr><th>Feature</th><th>Description</th></tr>
+        <tr><td><code>income</code></td><td>Monthly income in ₹</td></tr>
+        <tr><td><code>expenses</code></td><td>Monthly expenses in ₹</td></tr>
+        <tr><td><code>emi</code></td><td>Monthly EMI obligations in ₹</td></tr>
+        <tr><td><code>savings</code></td><td>Current savings in ₹</td></tr>
+        <tr><td><code>dependents</code></td><td>Number of dependents (0–10)</td></tr>
+        <tr><td><code>age</code></td><td>Age in years (18–90)</td></tr>
+        <tr><td><code>has_insurance</code></td><td>Binary: 1=insured, 0=uninsured</td></tr>
+        <tr><td><code>renting</code></td><td>Binary: 1=renting, 0=owns</td></tr>
+      </table>
+    </div>
+    <div>
+      <h4>Derived / Encoded Features (8)</h4>
+      <table>
+        <tr><th>Feature</th><th>How Computed</th></tr>
+        <tr><td><code>job_enc</code></td><td>Label-encoded job type (0–4)</td></tr>
+        <tr><td><code>life_enc</code></td><td>Label-encoded life stage (0–4)</td></tr>
+        <tr><td><code>city_enc</code></td><td>Label-encoded city tier (0–2)</td></tr>
+        <tr><td><code>emi_ratio</code></td><td>EMI ÷ Income</td></tr>
+        <tr><td><code>expense_ratio</code></td><td>Expenses ÷ Income</td></tr>
+        <tr><td><code>surplus</code></td><td>Income − Expenses − EMI</td></tr>
+        <tr><td><code>savings_ratio</code></td><td>Savings ÷ (Income × 12)</td></tr>
+        <tr><td><code>survival_months</code></td><td>Savings ÷ Expenses</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Dual Model Architecture</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="tag" style="background:#ecfdf5;color:#166534;">Model 1: Regressor</div>
+      <div class="card-title">XGBoostRegressor — Predicts Risk Score</div>
+      <p>Outputs a continuous value 0–100. <strong>n_estimators=400, max_depth=7</strong>. Evaluates R² and MAE on test set.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#eff6ff;color:#1e40af;">Model 2: Classifier</div>
+      <div class="card-title">XGBoostClassifier — Predicts Risk Level</div>
+      <p>Outputs Low/Medium/High/Critical + confidence probabilities. Same hyperparameters. Evaluates accuracy score.</p>
+    </div>
+  </div>
+
+  <h3>Flask Service (serve.py) — API Endpoints</h3>
+  <table>
+    <tr><th>Endpoint</th><th>Method</th><th>Description</th></tr>
+    <tr><td><code>/predict</code></td><td>POST</td><td>Takes financial inputs, returns mlRiskScore, mlRiskLevel, confidence, probabilities</td></tr>
+    <tr><td><code>/health</code></td><td>GET</td><td>Returns service status + model metadata (R², accuracy)</td></tr>
+    <tr><td><code>/feature-importance</code></td><td>GET</td><td>Returns XGBoost feature importance scores</td></tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ 6. AI / LLM INTEGRATION ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fef3c7;">🧠</div>
+    <h2>6. AI Integration — Groq + LLaMA-3.3-70b</h2>
+    <span class="num">SECTION 6</span>
+  </div>
+
+  <h3>What is Groq?</h3>
+  <p><strong>Groq</strong> is an AI inference platform that runs large language models at extremely high speed (~500 tokens/second) using custom LPU (Language Processing Unit) hardware. It provides an OpenAI-compatible API.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">LLM Used: LLaMA-3.3-70b-versatile</div>
+      <p>Meta's open-source large language model with 70 billion parameters. Used for the chatbot endpoint. The analysis endpoint uses <code>llama-3.1-8b-instant</code> for faster response.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">API Parameters Used</div>
+      <ul>
+        <li><strong>temperature: 0.35</strong> — low = more deterministic, factual financial advice</li>
+        <li><strong>max_tokens: 600</strong> — controlled output length</li>
+        <li><strong>response_format: json_object</strong> — structured output</li>
+        <li><strong>timeout: 8000ms</strong> — fail fast, use fallback</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>What does the AI generate? (aiService.js)</h3>
+  <pre><span class="c">// Groq returns structured JSON:</span>
+{
+  <span class="s">"insights"</span>:    <span class="s">"Personalised paragraph about the user's financial situation"</span>,
+  <span class="s">"suggestions"</span>: [<span class="s">"Action step 1"</span>, <span class="s">"Action step 2"</span>, ...],  <span class="c">// 5 action items</span>
+  <span class="s">"warnings"</span>:    [<span class="s">"Warning about health insurance gap"</span>, ...]     <span class="c">// specific risks</span>
+}</pre>
+
+  <h3>Fallback Engine</h3>
+  <div class="alert alert-tip">
+    <span class="alert-icon">✅</span>
+    <div>If the Groq API is unavailable (no key, rate limit, network error), the <strong>rule-based fallback engine</strong> in <code>aiService.js</code> generates insights based on the risk level, EMI ratio, insurance status, and job type. Users always get a useful response.</div>
+  </div>
+
+  <h3>Chatbot System Prompt Design (chatController.js)</h3>
+  <p>The chatbot is given a detailed system prompt that:</p>
+  <ul>
+    <li>Defines expertise areas: FDs, Liquid MFs, PPF, EPF, NPS, ELSS, SIPs</li>
+    <li>Instructs to use ₹ (INR) for all amounts</li>
+    <li>Limits answers to 180 words unless asked for detail</li>
+    <li>Injects user's financial profile context if available (risk score, income, EMI)</li>
+    <li>Includes SEBI disclaimer (educational info, not registered financial advice)</li>
+    <li>Keeps last 8 conversation turns for context</li>
+  </ul>
+
+  <h3>Voice Features (ChatBot.jsx)</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">Voice Input — Web Speech API</div>
+      <p>Uses browser's <code>SpeechRecognition</code> with <code>lang='en-IN'</code> for Indian English accent recognition. Supports continuous speech-to-text.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">Voice Output — SpeechSynthesis</div>
+      <p>Uses browser's <code>speechSynthesis.speak()</code> to auto-read AI responses aloud. Shows animated sound-wave while speaking. Each bubble has play/stop controls.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════ 7. AUTHENTICATION SYSTEM ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#eff6ff;">🔐</div>
+    <h2>7. Authentication System — JWT + bcrypt</h2>
+    <span class="num">SECTION 7</span>
+  </div>
+
+  <h3>Registration Flow (POST /api/auth/register)</h3>
+  <div class="flow">
+    <span class="flow-step">Input validation</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Email uniqueness check</span><span class="flow-arrow">→</span>
+    <span class="flow-step">bcrypt.hash(pass, 12)</span><span class="flow-arrow">→</span>
+    <span class="flow-step">Save to users.json</span><span class="flow-arrow">→</span>
+    <span class="flow-step ai">Send welcome email</span><span class="flow-arrow">→</span>
+    <span class="flow-step alt">Return JWT token</span>
+  </div>
+
+  <h3>Login Flow (POST /api/auth/login)</h3>
+  <div class="flow">
+    <span class="flow-step">Find user by email</span><span class="flow-arrow">→</span>
+    <span class="flow-step">bcrypt.compare()</span><span class="flow-arrow">→</span>
+    <span class="flow-step alt">Return JWT token</span>
+  </div>
+
+  <h3>Security Details</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">Password Hashing (bcryptjs)</div>
+      <ul>
+        <li><strong>Cost factor: 12</strong> — industry standard (2^12 iterations)</li>
+        <li>Each password has a random salt automatically</li>
+        <li>Even if database leaks, passwords cannot be reverse-engineered</li>
+        <li>Never stored in plain text</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">JWT Token</div>
+      <ul>
+        <li><strong>Expiry: 7 days</strong></li>
+        <li>Payload: <code>{ id, email, name, role }</code></li>
+        <li>Verified on every protected request via <code>auth.js</code> middleware</li>
+        <li>Stored in <code>localStorage</code> on the client</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Role-Based Access Control</div>
+      <ul>
+        <li>Two roles: <code>user</code> and <code>admin</code></li>
+        <li><strong>First registered user becomes admin</strong></li>
+        <li>Admin routes protected by <code>requireAdmin</code> middleware</li>
+        <li>Regular users cannot access <code>/api/admin/*</code></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Input Validation</div>
+      <ul>
+        <li>Email format validated with regex</li>
+        <li>Password minimum 6 characters</li>
+        <li>Name, email, password all required</li>
+        <li>Email stored in lowercase</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>JWT Middleware (auth.js)</h3>
+  <pre><span class="k">const</span> <span class="f">verifyToken</span> = (req, res, next) => {
+  <span class="k">const</span> header = req.headers[<span class="s">'authorization'</span>];
+  <span class="k">const</span> token  = header?.startsWith(<span class="s">'Bearer '</span>) ? header.slice(<span class="num">7</span>) : <span class="k">null</span>;
+  <span class="k">if</span> (!token) <span class="k">return</span> res.status(<span class="num">401</span>).json({ error: <span class="s">'Authentication required'</span> });
+  <span class="k">try</span> {
+    req.user = jwt.verify(token, JWT_SECRET);  <span class="c">// decode &amp; attach to request</span>
+    next();
+  } <span class="k">catch</span> {
+    <span class="k">return</span> res.status(<span class="num">403</span>).json({ error: <span class="s">'Invalid or expired token'</span> });
+  }
+};</pre>
+</div>
+
+<!-- ════════════════════════════════════════ 8. DATABASE & MODELS ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#ecfdf5;">🗄️</div>
+    <h2>8. Database Design — MongoDB + Mongoose</h2>
+    <span class="num">SECTION 8</span>
+  </div>
+
+  <h3>Dual Storage Strategy</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="tag" style="background:#dcfce7;color:#166534;">Primary: MongoDB</div>
+      <div class="card-title">When MONGO_URI is configured</div>
+      <p>Full Mongoose ORM, schema validation, indexes, virtuals, connection pooling (max 10 connections), auto-reconnect with event listeners.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#fff7ed;color:#c2410c;">Fallback: JSON Files</div>
+      <div class="card-title">When no DB configured</div>
+      <p><code>data.json</code> for analysis records (max 100), <code>users.json</code> for user accounts. Zero external dependency — works anywhere.</p>
+    </div>
+  </div>
+
+  <h3>UserData Mongoose Schema</h3>
+  <pre><span class="k">const</span> UserDataSchema = <span class="k">new</span> Schema({
+  inputs:     InputsSchema,       <span class="c">// income, expenses, emi, savings, jobType, etc.</span>
+  results:    Schema.Types.Mixed, <span class="c">// full calculation blob (flexible)</span>
+  aiInsights: AiInsightsSchema,   <span class="c">// { insights, suggestions[], warnings[], source }</span>
+  savedAt:    { type: Date, default: Date.now, index: true },
+}, { timestamps: true, collection: <span class="s">'userdata'</span> });
+
+<span class="c">// Indexes for performance:</span>
+UserDataSchema.index({ savedAt: <span class="num">-1</span> });                       <span class="c">// history queries (newest first)</span>
+UserDataSchema.index({ <span class="s">'inputs.jobType'</span>: <span class="num">1</span>, savedAt: <span class="num">-1</span> }); <span class="c">// analytics by job type</span></pre>
+
+  <h3>MongoDB Connection Config (db.js)</h3>
+  <ul>
+    <li><strong>serverSelectionTimeoutMS: 5000</strong> — fails fast if MongoDB unreachable</li>
+    <li><strong>socketTimeoutMS: 45000</strong> — closes idle sockets after 45s</li>
+    <li><strong>maxPoolSize: 10</strong> — max 10 concurrent connections</li>
+    <li>Connection lifecycle events: <code>disconnected</code>, <code>reconnected</code>, <code>error</code></li>
+  </ul>
+</div>
+
+<!-- ════════════════════════════════════════════ 9. FRONTEND COMPONENTS ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#ede9fe;">🖥️</div>
+    <h2>9. Frontend Components — React Architecture</h2>
+    <span class="num">SECTION 9</span>
+  </div>
+
+  <h3>Application State Management (App.jsx)</h3>
+  <p>The root <code>App.jsx</code> uses React hooks and Context API — no Redux or external state library needed:</p>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">State Variables</div>
+      <ul>
+        <li><code>view</code> — current page (landing, portal, dashboard, history, auth, admin)</li>
+        <li><code>results</code> — analysis result from API</li>
+        <li><code>dark</code> — theme toggle (dark/light)</li>
+        <li><code>user</code> — logged-in user object (from localStorage)</li>
+        <li><code>token</code> — JWT token (from localStorage)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Context Provided</div>
+      <p><code>ThemeCtx</code> — provides <code>{ dark, toggle }</code> to all child components. Any component can call <code>useTheme()</code> hook to read the current theme and toggle it.</p>
+      <br/>
+      <p>Auth state is passed as props down to components that need user info or the JWT token for API calls.</p>
+    </div>
+  </div>
+
+  <h3>Page / Component Map</h3>
+  <table>
+    <thead><tr><th>Component</th><th>Route/View</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>Landing.jsx</code></td><td>landing</td><td>Home page — hero section, feature list, CTA buttons</td></tr>
+      <tr><td><code>AuthPage.jsx</code></td><td>auth</td><td>Sign In / Register toggle — calls POST /api/auth/login or /register</td></tr>
+      <tr><td><code>PortalPage.jsx</code></td><td>portal</td><td>Logged-in dashboard — quick start, recent history, user greeting</td></tr>
+      <tr><td><code>CalculatorForm.jsx</code></td><td>calculator</td><td>6-step multi-step form with sliders, tooltips, review step</td></tr>
+      <tr><td><code>AnalysisPage.jsx</code></td><td>analysis</td><td>Boot animation sequence while API call is made</td></tr>
+      <tr><td><code>Dashboard.jsx</code></td><td>dashboard</td><td>5-tab results dashboard — Overview, AI Insights, Projection, Stress Test, ML</td></tr>
+      <tr><td><code>HistoryPanel.jsx</code></td><td>history</td><td>List of saved analyses — calls GET /api/history</td></tr>
+      <tr><td><code>ChatBot.jsx</code></td><td>global (all pages)</td><td>Floating chatbot with voice input/output, keyboard shortcut Ctrl+K</td></tr>
+      <tr><td><code>AdminPage.jsx</code></td><td>admin</td><td>User management, system stats, risk distribution chart</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Dashboard — 5 Tabs Explained</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="tag" style="background:#ede9fe;color:#5b21b6;">Tab 1: Overview</div>
+      <div class="card-title">Key Metrics + Risk Gauge</div>
+      <p>Animated SVG risk gauge (0–100 arc), metric cards for fund target, savings gap, months covered. Risk factors and protective factors listed.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#faf5ff;color:#5b21b6;">Tab 2: AI Insights</div>
+      <div class="card-title">LLM-Generated Advice</div>
+      <p>Groq insights paragraph, 5 action suggestions, specific warnings. Shows AI/ML agreement indicator. Smart suggestions banner.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#ecfdf5;color:#166534;">Tab 3: Projection</div>
+      <div class="card-title">12-Month Chart</div>
+      <p>Recharts AreaChart showing monthly savings growth towards the target. Interactive slider to adjust monthly saving amount. Target reached date shown.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#fff7ed;color:#c2410c;">Tab 4: Stress Test</div>
+      <div class="card-title">Income Drop Simulation</div>
+      <p>Simulates income drop by X% and expense spike by Y%. Recalculates how many months the fund covers under worst-case scenarios.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#eff6ff;color:#1e40af;">Tab 5: ML Analysis</div>
+      <div class="card-title">XGBoost Prediction</div>
+      <p>Shows XGBoost's independent risk score and level. Confidence percentage. Probability bars for each risk level. Agreement/disagreement indicator with rule-based model.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#f0fdf4;color:#166534;">3-Tier Plan</div>
+      <div class="card-title">Investment Breakdown</div>
+      <p>Pie chart + breakdown of how to split the emergency fund across Savings Account, Liquid MF, and Fixed Deposit.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ 10. API ENDPOINTS ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fff7ed;">🔌</div>
+    <h2>10. All API Endpoints — Complete Reference</h2>
+    <span class="num">SECTION 10</span>
+  </div>
+
+  <table>
+    <thead><tr><th>Method</th><th>Endpoint</th><th>Auth?</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/analyze</code></td><td>No</td><td>Full analysis — calc engine + Groq AI + XGBoost ML (primary endpoint)</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/calculate</code></td><td>No</td><td>Fast calculation only — no AI, instant response (backward-compatible alias)</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/save</code></td><td>Optional</td><td>Save an analysis result to history</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/history/save</code></td><td>Optional</td><td>Legacy alias for /api/save</td></tr>
+      <tr><td><span class="pill" style="background:#dbeafe;color:#1e40af;">GET</span></td><td><code>/api/history</code></td><td>Optional</td><td>Paginated list of saved analysis records</td></tr>
+      <tr><td><span class="pill" style="background:#dbeafe;color:#1e40af;">GET</span></td><td><code>/api/health</code></td><td>No</td><td>Server health check — DB status, version, uptime</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/auth/register</code></td><td>No</td><td>Register new user — returns JWT token</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/auth/login</code></td><td>No</td><td>Login — returns JWT token</td></tr>
+      <tr><td><span class="pill" style="background:#dbeafe;color:#1e40af;">GET</span></td><td><code>/api/auth/me</code></td><td>JWT Required</td><td>Get current logged-in user details</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/chat</code></td><td>No</td><td>AI chatbot — sends message, gets Groq response</td></tr>
+      <tr><td><span class="pill" style="background:#dbeafe;color:#1e40af;">GET</span></td><td><code>/api/admin/stats</code></td><td>Admin JWT</td><td>Total users, analyses, risk distribution, avg fund target</td></tr>
+      <tr><td><span class="pill" style="background:#dbeafe;color:#1e40af;">GET</span></td><td><code>/api/admin/users</code></td><td>Admin JWT</td><td>List all registered users</td></tr>
+      <tr><td><span class="pill" style="background:#dcfce7;color:#166534;">POST</span></td><td><code>/api/admin/users/:id/role</code></td><td>Admin JWT</td><td>Change a user's role</td></tr>
+    </tbody>
+  </table>
+
+  <h3>POST /api/analyze — Input Schema</h3>
+  <pre>{
+  <span class="s">"monthlyIncome"</span>:      <span class="num">60000</span>,         <span class="c">// Required — ₹ per month</span>
+  <span class="s">"monthlyExpenses"</span>:    <span class="num">30000</span>,         <span class="c">// Required — ₹ per month</span>
+  <span class="s">"emi"</span>:                <span class="num">12000</span>,         <span class="c">// Optional — loan EMI ₹/month</span>
+  <span class="s">"savings"</span>:            <span class="num">80000</span>,         <span class="c">// Optional — current total savings ₹</span>
+  <span class="s">"jobType"</span>:            <span class="s">"corporate"</span>,   <span class="c">// govt | corporate | freelancer | business | gig</span>
+  <span class="s">"dependents"</span>:         <span class="num">2</span>,             <span class="c">// 0–10</span>
+  <span class="s">"cityTier"</span>:           <span class="s">"1"</span>,           <span class="c">// "1" | "2" | "3"</span>
+  <span class="s">"age"</span>:                <span class="num">32</span>,            <span class="c">// 18–90</span>
+  <span class="s">"lifeStage"</span>:          <span class="s">"mid_career"</span>, <span class="c">// single | mid_career | married_with_kids | pre_retirement | single_parent</span>
+  <span class="s">"hasHealthInsurance"</span>: <span class="s">"yes"</span>,         <span class="c">// "yes" | "partial" | "no"</span>
+  <span class="s">"rentOrOwn"</span>:          <span class="s">"rent"</span>         <span class="c">// "rent" | "own_loan" | "own_free"</span>
+}</pre>
+</div>
+
+<!-- ════════════════════════════════════════════ 11. SECURITY FEATURES ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fee2e2;">🛡️</div>
+    <h2>11. Security Features (OWASP Alignment)</h2>
+    <span class="num">SECTION 11</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="tag" style="background:#fee2e2;color:#991b1b;">A01: Broken Access Control</div>
+      <p>JWT middleware on all protected routes. Role-based access control (user vs admin). Admin routes double-checked with <code>requireAdmin</code> guard.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#fff7ed;color:#c2410c;">A02: Cryptographic Failures</div>
+      <p>Passwords hashed with bcrypt (cost 12). JWT signed with secret key. HTTPS recommended for production (TLS).</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#fef3c7;color:#92400e;">A03: Injection</div>
+      <p>All inputs validated and sanitised before use. No raw SQL. MongoDB queries use Mongoose schema which prevents NoSQL injection.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#ecfdf5;color:#166534;">A05: Security Misconfiguration</div>
+      <p>CORS restricted to known origins. JSON body size capped at 10KB. Environment variables for all secrets (not hardcoded).</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#eff6ff;color:#1e40af;">A07: Auth Failures</div>
+      <p>Timing-safe password comparison via bcrypt.compare. Token expiry (7 days). Email uniqueness enforced on registration.</p>
+    </div>
+    <div class="card">
+      <div class="tag" style="background:#fdf4ff;color:#6b21a8;">A09: Logging Failures</div>
+      <p>Structured logging (morgan + custom logger). All auth events, API errors, and AI/ML calls are logged with context for audit trail.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════ 12. VIVA Q&A ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fef3c7;">❓</div>
+    <h2>12. Expected Viva Questions & Model Answers</h2>
+    <span class="num">SECTION 12</span>
+  </div>
+
+  <h3>Basic / Project Understanding</h3>
+
+  <div class="qa">
+    <div class="q">Q1. What is the main objective of your project?</div>
+    <div class="a">SafetyNet.ai helps Indian individuals understand their financial risk and calculate the ideal emergency fund they need. It solves the real problem that most Indians are financially unprepared for emergencies — job loss, medical bills, or sudden expenses. It uses 14 financial factors, an AI (LLaMA LLM), and a trained ML model (XGBoost) to provide personalised, data-driven recommendations.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q2. Why did you choose a full-stack approach with separate services?</div>
+    <div class="a">The application has three distinct concerns: a real-time interactive UI (React), complex business logic and auth (Node/Express), and a computationally heavy ML model (Python/XGBoost). Separating them as microservices allows each to scale independently, use the best language for the task (Python for ML), and fail gracefully without bringing down the whole application.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q3. How does your system handle failures — what if Groq or the ML service is down?</div>
+    <div class="a">The system has three layers of fallback: (1) If XGBoost Flask service is offline, the Node server catches the ECONNREFUSED error and returns ml: null — the analysis still works with just the rule-based engine. (2) If Groq API fails, the aiService falls back to a high-quality rule-based insight engine. (3) If MongoDB is not configured, the system uses JSON files for storage. The user always gets a complete, useful response.</div>
+  </div>
+
+  <h3>Algorithm & Calculation</h3>
+
+  <div class="qa">
+    <div class="q">Q4. How do you calculate the risk score? Walk me through the algorithm.</div>
+    <div class="a">The risk score is a weighted composite of 9 factors. Starting from 0, I add: job type score (5 for govt, up to 48 for freelancer), 7 points per dependent, 6–32 points based on EMI-to-income ratio (RBI recommends below 30%), 8 for Tier-1 city, 10 for age above 50 (minus 5 for young age), 18 for no health insurance, 5 for renting, and 8–20 based on savings/expense ratio. The total is clamped to 0–100 and mapped to Low/Medium/High/Critical buckets.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q5. Why is "no health insurance" the biggest single risk factor (+18 points)?</div>
+    <div class="a">Medical emergencies are the #1 cause of financial ruin in India. A single hospitalisation can cost ₹2–10 lakhs — which would wipe out most people's emergency funds. Without insurance, the emergency fund must also absorb healthcare costs, requiring a significantly larger buffer. That's why we add an extra month to the recommendation and 18 risk points.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q6. What is the 3-tier emergency fund strategy?</div>
+    <div class="a">Following Indian financial planning best practices: Tier 1 is 1 month in a savings account (instantly accessible for same-day emergencies), Tier 2 is 2 months in liquid mutual funds (T+1 redemption, ~7% returns), and Tier 3 is the remaining amount in Fixed Deposits (~7.5% returns, for longer job-loss scenarios of 2–6 months). This balances accessibility with returns.</div>
+  </div>
+
+  <h3>Machine Learning</h3>
+
+  <div class="qa">
+    <div class="q">Q7. Why did you use XGBoost instead of a neural network or linear regression?</div>
+    <div class="a">XGBoost is the industry standard for tabular/structured data like financial profiles. Neural networks need large datasets and extensive hyperparameter tuning for tabular data. Linear regression cannot capture non-linear relationships (e.g., EMI ratio has a stepped effect, not linear). XGBoost handles mixed feature types, missing values, and provides feature importance — perfect for our use case. Our R² of 0.949 on test data validates this choice.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q8. Your training data is synthetic — isn't that a problem?</div>
+    <div class="a">Not in this case. The labels (risk scores) are generated by the same rule-based algorithm (calculationService.js) that we're trying to approximate. The ML model learns to predict the output of the financial algorithm from the inputs, without needing real-world labelled data which would be impossible to collect at scale with privacy concerns. The synthetic profiles follow realistic Indian income distributions, so the model generalises well to real inputs.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q9. What are the 16 features your XGBoost model uses?</div>
+    <div class="a">8 raw inputs: income, expenses, EMI, savings, dependents, age, has_insurance (binary), renting (binary). Plus 8 derived features: job_enc (label-encoded job type), life_enc (life stage), city_enc (city tier), emi_ratio (EMI÷income), expense_ratio (expenses÷income), surplus (income−expenses−EMI), savings_ratio (savings÷annual_income), survival_months (savings÷expenses). The derived features help the model capture relationships the raw numbers don't directly express.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q10. What do R²=0.949 and Accuracy=85.3% mean?</div>
+    <div class="a">R²=0.949 means the regression model (risk score predictor) explains 94.9% of the variance in risk scores — very high. An R² of 1.0 would be perfect. Accuracy=85.3% means the classifier correctly predicts the risk level (Low/Medium/High/Critical) 85.3% of the time on unseen test data. The MAE of 4.22 means on average the predicted score is within ±4.22 points of the actual rule-based score.</div>
+  </div>
+
+  <h3>AI / LLM Integration</h3>
+
+  <div class="qa">
+    <div class="q">Q11. What is Groq and why did you use it over OpenAI?</div>
+    <div class="a">Groq is an AI inference platform using custom LPU (Language Processing Unit) chips that run LLMs at ~500 tokens/second — roughly 10× faster than typical GPU-based inference. We chose Groq because: it's free tier supports our demo use case, it has an OpenAI-compatible API (easy integration), LLaMA-3.3-70b is open-source (no licensing issues), and the speed means our API responds in 2–3 seconds rather than 10–15.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q12. Why is the temperature set to 0.35 for analysis but higher for the chatbot?</div>
+    <div class="a">Temperature controls randomness. For financial analysis (aiService.js), we want deterministic, factual output — a temperature of 0.35 means the model gives consistent, reliable advice rather than hallucinating creative answers. The chatbot is more conversational so slightly higher temperature makes responses feel more natural and varied. Low temperature = more focused, high temperature = more creative.</div>
+  </div>
+
+  <h3>Frontend & UX</h3>
+
+  <div class="qa">
+    <div class="q">Q13. How does the dark/light theme toggle work?</div>
+    <div class="a">React Context API (ThemeCtx) holds the dark boolean state in the root App.jsx. A custom CSS variable system switches between two sets of color tokens (--bg, --surface, --text etc.) based on a data-theme attribute on the root div. All components access the theme via the useTheme() hook. Framer Motion transition handles smooth 0.4s animations between themes. The preference is stored in React state (not localStorage) so resets on refresh.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q14. Why did you use jsPDF for PDF generation on the client side?</div>
+    <div class="a">Client-side PDF generation (jsPDF in the browser) means: no extra server load, immediate download without a round-trip to the server, and the user's data never needs to be sent again just for a PDF. The alternative — server-side PDF generation with Puppeteer or pdfkit — would add complexity and latency. jsPDF v4 supports modern JavaScript, React integration, and canvas drawing for charts.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q15. Explain the voice input/output feature.</div>
+    <div class="a">Voice input uses the browser's Web Speech API — specifically SpeechRecognition with lang='en-IN' for Indian English. When the mic button is pressed, it starts continuous recognition and appends recognised text to the input field. Voice output uses SpeechSynthesis API — when the AI sends a response, speechSynthesis.speak() is called with the text. An animated sound-wave SVG shows while speaking. This is entirely browser-native — no external API needed.</div>
+  </div>
+
+  <h3>Architecture & Design</h3>
+
+  <div class="qa">
+    <div class="q">Q16. Why did you separate the ML service from the Node.js backend?</div>
+    <div class="a">Python has the best ML ecosystem (scikit-learn, XGBoost, numpy, pandas) while Node.js is better for web APIs. Running the ML model in Node would require awkward Python-in-Node bridges (python-shell) or rewriting XGBoost in JavaScript. The microservice pattern lets each service use its ideal runtime, scale independently, and be replaced or updated without touching the main backend. The Node server calls Flask via HTTP with a 4-second timeout.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q17. How does the admin panel work? How is the first admin created?</div>
+    <div class="a">The first user who registers automatically gets the 'admin' role (authController.js line: role: users.length === 0 ? 'admin' : 'user'). Admin routes (/api/admin/*) are protected by two middleware layers: verifyToken (checks valid JWT) then requireAdmin (checks role === 'admin'). The admin panel shows total users, total analyses, today's count, risk distribution, average fund target, and allows changing user roles.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q18. What happens when a user submits the form? Walk through the complete flow.</div>
+    <div class="a">1. CalculatorForm.jsx collects 11 inputs across 6 steps and validates them. 2. On submit, it calls POST /api/analyze. 3. AnalysisPage.jsx shows a animated "boot sequence" while waiting. 4. Express validates inputs (422 if invalid), normalises field names, runs the calculation engine synchronously. 5. Groq AI and XGBoost ML predictions run in parallel via Promise.all(). 6. A unified JSON response is built combining all three results. 7. React receives the response, stores it in state, navigates to Dashboard. 8. The user optionally saves to history (POST /api/save).</div>
+  </div>
+
+  <h3>Deployment & Environment</h3>
+
+  <div class="qa">
+    <div class="q">Q19. What environment variables are needed to run this project?</div>
+    <div class="a">Server needs: GROQ_API_KEY (for LLM features), MONGO_URI (for MongoDB, optional), JWT_SECRET (for auth security), SMTP_USER and SMTP_PASS (for email). ML service needs no special env vars — it uses local model files. Client needs the API URL (default localhost:5001). Without GROQ_API_KEY, the app uses rule-based fallback. Without MONGO_URI, it uses JSON files. So technically the app runs with zero environment variables configured.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q20. What are the three ports used and what runs on each?</div>
+    <div class="a">Port 5173 — Vite dev server (React frontend). Port 5001 — Express API server (Node.js backend). Port 5002 — Flask ML service (Python XGBoost). In production, Vite would be built to static files and served via Nginx/CDN, while only ports 5001 and 5002 would be running as backend services.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ 13. CODE WALKTHROUGH ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#ecfdf5;">💻</div>
+    <h2>13. Key Code Walkthroughs</h2>
+    <span class="num">SECTION 13</span>
+  </div>
+
+  <h3>Parallel AI + ML Execution (analyzeController.js)</h3>
+  <pre><span class="c">// Run Groq AI insights and XGBoost ML prediction IN PARALLEL</span>
+<span class="k">const</span> [aiResult, mlResult] = <span class="k">await</span> Promise.all([
+  aiService.<span class="f">generateAIInsights</span>(calcResult, body),  <span class="c">// calls Groq API (8s timeout)</span>
+  mlService.<span class="f">getMLPrediction</span>(body),                 <span class="c">// calls Flask ML (4s timeout)</span>
+]);
+
+<span class="c">// Agreement: do the rule-based and ML models agree on risk level?</span>
+<span class="k">const</span> mlAgreement = mlResult.source === <span class="s">'xgboost'</span>
+  ? mlResult.mlRiskLevel === calcResult.riskLevel
+    ? <span class="s">'agree'</span>
+    : <span class="s">'disagree'</span>
+  : <span class="s">'unavailable'</span>;</pre>
+
+  <h3>Risk Score Calculation — EMI Factor (calculationService.js)</h3>
+  <pre><span class="c">/* EMI-to-income ratio: RBI recommends below 30% */</span>
+<span class="k">const</span> emiRatio = income > <span class="num">0</span> ? emiAmt / income : <span class="num">0</span>;
+
+<span class="k">if</span> (emiRatio > <span class="num">0.5</span>) {
+  monthsRecommended += <span class="num">2.5</span>; riskScore += <span class="num">32</span>;          <span class="c">// critical debt load</span>
+} <span class="k">else if</span> (emiRatio > <span class="num">0.3</span>) {
+  monthsRecommended += <span class="num">1.5</span>; riskScore += <span class="num">16</span>;          <span class="c">// moderate burden</span>
+} <span class="k">else if</span> (emiRatio > <span class="num">0</span>) {
+  monthsRecommended += <span class="num">0.5</span>; riskScore += <span class="num">6</span>;           <span class="c">// minor debt</span>
+} <span class="k">else</span> {
+  protectiveFactors.push({ factor: <span class="s">'Zero EMI / Debt-Free'</span> });  <span class="c">// good!</span>
+}</pre>
+
+  <h3>JWT Token Creation & Verification</h3>
+  <pre><span class="c">// Create token on login/register (authController.js)</span>
+<span class="k">function</span> <span class="f">signToken</span>(user) {
+  <span class="k">return</span> jwt.<span class="f">sign</span>(
+    { id: user.id, email: user.email, name: user.name, role: user.role },
+    JWT_SECRET,
+    { expiresIn: <span class="s">'7d'</span> }
+  );
+}
+
+<span class="c">// Verify on each request (middleware/auth.js)</span>
+req.user = jwt.<span class="f">verify</span>(token, JWT_SECRET);  <span class="c">// throws if invalid or expired</span></pre>
+
+  <h3>XGBoost Feature Vector Construction (serve.py)</h3>
+  <pre><span class="k">def</span> <span class="f">build_feature_vector</span>(data):
+    <span class="c"># Raw features</span>
+    income   = max(<span class="num">0</span>, float(data.get(<span class="s">"monthlyIncome"</span>, <span class="num">0</span>)))
+    emi      = max(<span class="num">0</span>, float(data.get(<span class="s">"emi"</span>, <span class="num">0</span>)))
+
+    <span class="c"># Derived ratios — these help the model learn non-linear relationships</span>
+    emi_ratio       = emi / income <span class="k">if</span> income > <span class="num">0</span> <span class="k">else</span> <span class="num">0</span>
+    expense_ratio   = expenses / income <span class="k">if</span> income > <span class="num">0</span> <span class="k">else</span> <span class="num">0</span>
+    survival_months = savings / expenses <span class="k">if</span> expenses > <span class="num">0</span> <span class="k">else</span> <span class="num">0</span>
+
+    <span class="c"># Categorical encoding (label encoding, not one-hot)</span>
+    job_enc = JOB_CLASSES.index(job)  <span class="c"># "corporate" → 1, "govt" → 4, etc.</span>
+
+    <span class="k">return</span> [income, expenses, emi, savings, deps, age,
+            insured, renting,
+            job_enc, life_enc, city_enc,
+            emi_ratio, expense_ratio, surplus, savings_ratio, survival_months]</pre>
+
+  <h3>MongoDB Connection with Fallback (db.js)</h3>
+  <pre><span class="k">const</span> <span class="f">connectDB</span> = <span class="k">async</span> () => {
+  <span class="k">const</span> uri = process.env.MONGO_URI;
+  <span class="k">if</span> (!uri) {
+    logger.<span class="f">warn</span>(<span class="s">'MONGO_URI not set — using file-based storage'</span>);
+    <span class="k">return false</span>;  <span class="c">// graceful fallback to data.json</span>
+  }
+  <span class="k">try</span> {
+    <span class="k">await</span> mongoose.<span class="f">connect</span>(uri, {
+      serverSelectionTimeoutMS: <span class="num">5000</span>,  <span class="c">// fail fast if unreachable</span>
+      maxPoolSize: <span class="num">10</span>,                 <span class="c">// connection pool size</span>
+    });
+    <span class="c">// Register lifecycle events for auto-reconnect</span>
+    mongoose.connection.<span class="f">on</span>(<span class="s">'disconnected'</span>, () => logger.<span class="f">warn</span>(<span class="s">'MongoDB disconnected'</span>));
+    <span class="k">return true</span>;
+  } <span class="k">catch</span> (err) {
+    logger.<span class="f">error</span>(<span class="s">'MongoDB failed — file fallback active'</span>, { error: err.message });
+    <span class="k">return false</span>;
+  }
+};</pre>
+</div>
+
+<!-- ════════════════════════════════════════════════ 14. QUICK REFERENCE ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#f0fdf4;">📋</div>
+    <h2>14. Quick Reference — Numbers & Facts</h2>
+    <span class="num">SECTION 14</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div>
+      <h3>ML Model Facts</h3>
+      <table>
+        <tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>Training Algorithm</td><td>XGBoost (Gradient Boosting)</td></tr>
+        <tr><td>Training Samples</td><td>6,400 (80/20 split from 8,000)</td></tr>
+        <tr><td>Test Samples</td><td>1,600</td></tr>
+        <tr><td>Features Used</td><td>16 (8 raw + 8 derived)</td></tr>
+        <tr><td>n_estimators</td><td>400</td></tr>
+        <tr><td>max_depth</td><td>7</td></tr>
+        <tr><td>Regressor R²</td><td>0.9486 (94.86%)</td></tr>
+        <tr><td>Classifier Accuracy</td><td>0.8531 (85.31%)</td></tr>
+        <tr><td>MAE (Mean Abs Error)</td><td>4.22 risk points</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>System Facts</h3>
+      <table>
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Frontend Port</td><td>5173 (Vite)</td></tr>
+        <tr><td>Backend Port</td><td>5001 (Express)</td></tr>
+        <tr><td>ML Service Port</td><td>5002 (Flask)</td></tr>
+        <tr><td>JWT Expiry</td><td>7 days</td></tr>
+        <tr><td>bcrypt Cost Factor</td><td>12</td></tr>
+        <tr><td>Groq Timeout</td><td>8,000ms (AI insights)</td></tr>
+        <tr><td>ML Service Timeout</td><td>4,000ms</td></tr>
+        <tr><td>Chatbot Timeout</td><td>12,000ms</td></tr>
+        <tr><td>Max Request Body</td><td>10KB</td></tr>
+        <tr><td>Max History Records</td><td>100 (file mode)</td></tr>
+        <tr><td>Chat History Window</td><td>Last 8 turns</td></tr>
+        <tr><td>LLM Temperature</td><td>0.35 (analysis), ~0.7 (chat)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <h3>Risk Thresholds Quick Reference</h3>
+  <div class="grid grid-2">
+    <table>
+      <tr><th>Risk Level</th><th>Score</th><th>Meaning</th></tr>
+      <tr><td><span class="pill bg-low">Low</span></td><td>0–25</td><td>Well-prepared, stable income, insured</td></tr>
+      <tr><td><span class="pill bg-medium">Medium</span></td><td>26–50</td><td>Partially funded, manageable risks</td></tr>
+      <tr><td><span class="pill bg-high">High</span></td><td>51–72</td><td>Under-funded, volatile income</td></tr>
+      <tr><td><span class="pill bg-critical">Critical</span></td><td>73–100</td><td>Dangerously exposed, urgent action needed</td></tr>
+    </table>
+    <table>
+      <tr><th>Job Type</th><th>Risk Points</th><th>Extra Months</th></tr>
+      <tr><td>Government</td><td>+5</td><td>+0 months</td></tr>
+      <tr><td>Corporate</td><td>+22</td><td>+1.5 months</td></tr>
+      <tr><td>Business Owner</td><td>+38</td><td>+3.5 months</td></tr>
+      <tr><td>Gig Worker</td><td>+42</td><td>+3.5 months</td></tr>
+      <tr><td>Freelancer</td><td>+48</td><td>+4.5 months</td></tr>
+    </table>
+  </div>
+
+  <div class="sep"></div>
+
+  <h3>How to Run the Project</h3>
+  <pre><span class="c"># Terminal 1 — Start Backend (Node/Express)</span>
+cd server
+npm install
+node index.js          <span class="c"># runs on http://localhost:5001</span>
+
+<span class="c"># Terminal 2 — Start ML Service (Python/Flask)</span>
+cd ml
+pip install flask flask-cors xgboost scikit-learn pandas numpy joblib
+python train_model.py  <span class="c"># first time: generates model files in ml/model/</span>
+python serve.py        <span class="c"># runs on http://localhost:5002</span>
+
+<span class="c"># Terminal 3 — Start Frontend (React/Vite)</span>
+cd client
+npm install
+npm run dev            <span class="c"># runs on http://localhost:5173</span></pre>
+</div>
+
+<!-- ══════════════════════════════════════ 15. PROJECT INNOVATION ══ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-icon" style="background:#fef3c7;">✨</div>
+    <h2>15. What Makes This Project Unique?</h2>
+    <span class="num">SECTION 15</span>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">1. Triple-Engine Analysis</div>
+      <p>Most financial calculators use only one algorithm. SafetyNet.ai runs a rule-based financial engine, a generative AI (LLaMA), and a trained ML model (XGBoost) — then compares their results to build user trust through the <strong>AI/ML Agreement Indicator</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">2. India-First Design</div>
+      <p>Built specifically for India — uses ₹ INR, understands Indian city tiers (Tier 1/2/3), Indian job types (govt/PSU vs gig), Indian financial products (PPF, ELSS, NPS, SIP), and references RBI and SEBI benchmarks.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">3. Graceful Degradation</div>
+      <p>Three independent fallback layers ensure the app always works — even with no internet (fallback insights), no database (JSON files), or no ML service (skips ML section). Zero hard dependencies for core functionality.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">4. Voice-Enabled Chatbot</div>
+      <p>The AI chatbot supports both voice input (en-IN speech recognition) and voice output (TTS auto-reads responses) — making it accessible and unique among financial tools for Indian users.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">5. Stress Testing Feature</div>
+      <p>Users can simulate worst-case scenarios — income drops and expense spikes — to see how long their emergency fund would last. This "what if" planning tool goes beyond basic calculators.</p>
+    </div>
+    <div class="card">
+      <div class="card-title">6. Real-Time PDF Report</div>
+      <p>Client-side PDF generation using jsPDF creates a professional 2-page A4 report with risk gauge, metrics, AI insights, and investment plan — instantly downloaded with no server round-trip.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-key" style="margin-top:16px;">
+    <span class="alert-icon">🏆</span>
+    <div><strong>Summary for Viva:</strong> This project demonstrates mastery of full-stack development (React + Node + Python), AI/ML integration (LLM + supervised learning), secure authentication (JWT + bcrypt), database design (MongoDB with file fallback), microservice architecture, and production-quality UX patterns (animations, voice, dark mode, PDF export).</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ FOOTER ══ -->
+<div style="text-align:center;padding:24px;color:var(--subtle);font-size:12px;border-top:1px solid var(--border);margin-top:24px;">
+  <strong style="color:var(--purple);">SafetyNet.ai</strong> · INT 428 Viva Preparation Guide · April 2026 &nbsp;|&nbsp;
+  <em>Print this page (Ctrl+P) → Save as PDF for offline use</em>
+</div>
+
+</div>
+
+<!-- Print button -->
+<div style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+  <button onclick="window.print()" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;border-radius:12px;padding:12px 24px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 8px 24px rgba(124,58,237,0.4);font-family:Inter,sans-serif;">
+    🖨️ Save as PDF
+  </button>
+</div>
+
+</body>
+</html>

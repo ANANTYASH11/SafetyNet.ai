@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, Mail, Lock, User, Eye, EyeOff, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { API_URL } from "../utils/api";
 
-const API = "http://localhost:5001/api";
+const API = API_URL;
 
 function InputField({ label, type, value, onChange, placeholder, icon: Icon, error, rightElement }) {
   return (

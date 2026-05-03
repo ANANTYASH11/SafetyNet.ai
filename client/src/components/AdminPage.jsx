@@ -8,8 +8,9 @@ import {
   ChevronLeft, ChevronRight, Server, Database, Info,
   Lock, Mail, Copy
 } from "lucide-react";
+import { API_URL } from "../utils/api";
 
-const API = "http://localhost:5001/api";
+const API = API_URL;
 const FMT = (n) => n == null ? "—" : "₹" + Number(n).toLocaleString("en-IN");
 const FMT_N = (n) => n == null ? "—" : Number(n).toLocaleString("en-IN");
 const RISK_COLOR = { Low: "#10b981", Medium: "#f59e0b", High: "#f43f5e", Critical: "#7c3aed" };

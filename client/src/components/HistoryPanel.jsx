@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, ShieldAlert, RefreshCw, ChevronRight, Inbox } from "lucide-react";
+import { API_URL } from "../utils/api";
 
 const FMT2 = (n) => {
   const v = Number(n);
@@ -106,12 +107,12 @@ export default function HistoryPanel({ onLoadResult }) {
   async function fetchHistory() {
     setLoading(true); setError("");
     try {
-      const res  = await fetch("http://localhost:5001/api/history");
+      const res  = await fetch(`${API_URL}/history`);
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Failed to load history");
       setRecords(json.records || json.data || json || []);
     } catch (e) {
-      setError("Could not load history. Make sure the server is running on port 5001.");
+      setError("Could not load history. Please check backend configuration.");
     } finally {
       setLoading(false);
     }

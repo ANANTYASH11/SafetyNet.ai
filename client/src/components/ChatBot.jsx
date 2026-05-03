@@ -27,9 +27,10 @@ import {
   Minimize2, Maximize2, Download, ChevronDown,
   ThumbsUp, ThumbsDown
 } from "lucide-react";
+import { API_URL } from "../utils/api";
 
 /* ── constants ────────────────────────────────────────────────── */
-const API = "http://localhost:5001/api";
+const API = API_URL;
 const FMT = (n) => "₹" + Math.round(n).toLocaleString("en-IN");
 
 const THINKING_LABELS = [

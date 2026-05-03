@@ -9,6 +9,7 @@ import AdminPage from "./components/AdminPage";
 import AnalysisPage from "./components/AnalysisPage";
 import PortalPage from "./components/PortalPage";
 import ChatBot from "./components/ChatBot";
+import { API_URL } from "./utils/api";
 import { ShieldCheck, History, Home, ArrowRight, Sun, Moon, RotateCcw, LogIn, LogOut, Shield } from "lucide-react";
 
 /* ── Theme context ─────────────────────────────────────────────── */
@@ -49,7 +50,7 @@ export default function App() {
 
   const handleSave = useCallback(async (data) => {
     try {
-      await fetch("http://localhost:5001/api/history/save", {
+      await fetch(`${API_URL}/history/save`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
         body: JSON.stringify(data),

@@ -4,6 +4,7 @@ import {
   ChevronRight, ChevronLeft, CheckCircle2,
   Loader2, Sparkles, AlertCircle, HelpCircle
 } from "lucide-react";
+import { API_URL } from "../utils/api";
 
 /* ── Inline tooltip ───────────────────────────────────────────── */
 function Tip({ text }) {
@@ -205,7 +206,7 @@ export default function CalculatorForm({ onComplete }) {
         hasHealthInsurance: data.hasHealthInsurance || "no",
         rentOrOwn:          data.rentOrOwn || "rent",
       };
-      const res  = await fetch("http://localhost:5001/api/analyze", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body) });
+      const res  = await fetch(`${API_URL}/analyze`, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body) });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error || "Server error");
       setTimeout(() => { setLoading(false); onComplete(json); }, aiDone ? 300 : 3500);
